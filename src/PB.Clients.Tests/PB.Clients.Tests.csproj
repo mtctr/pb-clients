@@ -22,13 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="GetClients\" />
-    <Folder Include="DeleteClient\" />
     <Folder Include="UpdateClient\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PB.Clientes.API\PB.Clients.API.csproj" />
+    <ProjectReference Include="..\PB.Clients.API\PB.Clients.API.csproj" />
   </ItemGroup>
 
 </Project>

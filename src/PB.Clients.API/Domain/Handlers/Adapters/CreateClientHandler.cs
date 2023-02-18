@@ -6,11 +6,11 @@ using PB.Clients.API.Domain.Handlers.Ports;
 
 namespace PB.Clients.API.Domain.Handlers.Adapters;
 
-public class CreatClientHandler : IHandler<CreateClientCommand>
+public class CreateClientHandler : IHandler<CreateClientCommand>
 {
     private readonly IClientRepository _clientRepository;
 
-    public CreatClientHandler(IClientRepository clientRepository)
+    public CreateClientHandler(IClientRepository clientRepository)
     {
         _clientRepository = clientRepository;
     }

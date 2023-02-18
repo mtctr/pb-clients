@@ -16,7 +16,7 @@ public class CreateClientHandlerTests
 	public CreateClientHandlerTests()
 	{
 		_clientRepository = new FakeClientRepository();
-		_createClientHandler = new CreatClientHandler(_clientRepository);
+		_createClientHandler = new CreateClientHandler(_clientRepository);
 			
 		var existingClient = new Client("Existing Client", _existingEmail);
 		_clientRepository.Add(existingClient);
@@ -30,6 +30,7 @@ public class CreateClientHandlerTests
 			Name = "foo",
 			Email = "bar",
         };
+		
 		var result = _createClientHandler.Handle(invalidCommand) as CommandResult;
 		Assert.False(result.Success, result.Message);
 	}
@@ -42,7 +43,8 @@ public class CreateClientHandlerTests
             Name = "Full Name",
             Email = _existingEmail,
         };
-        var result = _createClientHandler.Handle(command) as CommandResult;
+        
+		var result = _createClientHandler.Handle(command) as CommandResult;
         Assert.False(result.Success, result.Message);
     }
 
@@ -54,7 +56,8 @@ public class CreateClientHandlerTests
             Name = "Full Name",
             Email = "valid@email.com",
         };
-        var result = _createClientHandler.Handle(command) as CommandResult;
+        
+		var result = _createClientHandler.Handle(command) as CommandResult;
         Assert.True(result.Success, result.Message);
     }
 }

@@ -12,7 +12,7 @@ public class CreateClientCommandTests
     [InlineData("")]
     [InlineData(" ")]
     [InlineData("  ")]
-    public void Command_is_invalid_if_email_is_empty_or_whitespace(string email)
+    public void Command_must_be_invalid_if_email_is_empty_or_whitespace(string email)
     {
         var command = new CreateClientCommand()
         {
@@ -29,7 +29,7 @@ public class CreateClientCommandTests
     [InlineData("invalid_email@")]
     [InlineData("invalid_email@.com")]
     [InlineData("invalid_email@com")]
-    public void Command_is_invalid_if_email_is_not_a_valid_email(string email)
+    public void Command_must_be_invalid_if_email_is_not_a_valid_email(string email)
     {
         var command = new CreateClientCommand()
         {
@@ -45,7 +45,7 @@ public class CreateClientCommandTests
     [InlineData("")]
     [InlineData(" ")]
     [InlineData("  ")]
-    public void Command_is_invalid_if_name_is_empty(string name)
+    public void Command_must_be_invalid_if_name_is_empty(string name)
     {
         var command = new CreateClientCommand()
         {
@@ -58,7 +58,7 @@ public class CreateClientCommandTests
     
     [Theory]
     [InlineData("FirstName")]        
-    public void Command_is_invalid_if_name_is_not_full_name(string name)
+    public void Command_must_be_invalid_if_name_is_not_full_name(string name)
     {
         var command = new CreateClientCommand()
         {
@@ -70,7 +70,7 @@ public class CreateClientCommandTests
     }
 
     [Fact]
-    public void Command_is_valid_if_name_is_full_name_and_email_is_valid()
+    public void Command_must_be_valid_if_name_is_full_name_and_email_is_valid()
     {
         var command = new CreateClientCommand()
         {

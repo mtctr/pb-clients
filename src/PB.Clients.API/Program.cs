@@ -13,7 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DbContext");
 builder.Services.AddDbContext<Context>(x => x.UseSqlServer(connectionString));
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
-builder.Services.AddScoped<IHandler<CreateClientCommand>, CreatClientHandler>();
+builder.Services.AddScoped<IHandler<CreateClientCommand>, CreateClientHandler>();
+builder.Services.AddScoped<IHandler<DeleteClientByEmailCommand>, DeleteClientByEmailHandler>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -28,10 +29,19 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+app.MapGet("/clients/getAll", ([FromServices] IClientRepository repository) => repository.GetAll()).WithName("GetAllClients");
+app.MapGet("/clients/getByEmail", ([FromQuery] string email, [FromServices] IClientRepository repository) => repository.GetByEmail(email)).WithName("GetClientByEmail");
+
 app.MapPost("/clients/create", ([FromBody]CreateClientCommand command, [FromServices]IHandler<CreateClientCommand> handler) =>
 {
     return handler.Handle(command) as CommandResult;    
 })
 .WithName("CreateClient");
+
+app.MapDelete("/clients/delete", ([FromBody] DeleteClientByEmailCommand command, [FromServices] IHandler<DeleteClientByEmailCommand> handler) =>
+{
+    return handler.Handle(command) as CommandResult;
+})
+.WithName("DeleteClientByEmail");
 
 app.Run();
