@@ -30,6 +30,11 @@ internal class FakeClientRepository : IClientRepository
         return _clients.FirstOrDefault(client => client.Email.Equals(email));
     }
 
+    public Client GetById(string id)
+    {
+        return _clients.FirstOrDefault(client => client.Id.ToString().Equals(id));
+    }
+
     public void Update(Client client)
     {
         var clientToRemove = _clients.First(clientDb => clientDb.Id.Equals(client.Id));

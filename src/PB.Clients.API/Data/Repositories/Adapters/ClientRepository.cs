@@ -34,6 +34,10 @@ public class ClientRepository : IClientRepository
         return _context.Clients.Where(client => client.Email.Equals(email)).FirstOrDefault();
     }
 
+    public Client GetById(string id)
+    {
+        return _context.Clients.Where(client => client.Id.ToString().Equals(id)).FirstOrDefault();
+    }
     public void Update(Client client)
     {
         _context.Update(client);

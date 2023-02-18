@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UpdateClient\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PB.Clients.API\PB.Clients.API.csproj" />
   </ItemGroup>
 
