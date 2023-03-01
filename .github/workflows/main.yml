@@ -15,13 +15,13 @@ jobs:
           SA_PASSWORD: 1q2w3e4r@#$
           ACCEPT_EULA: 'Y'
         ports:
-          - 1433:1433
+          - 1433:1433        
     steps:
       - name: Set environment variable ENV_CONTAINER_ID
         run: echo "ENV_CONTAINER_ID=$(docker ps --all --filter status=running --no-trunc --format "{{.ID}}")" >> $GITHUB_ENV
       -
         name: Allow Remote Connections to DB
-        run: docker exec -i $ENV_CONTAINER_ID /opt/mssql-tools/bin/sqltools -S localhost -U SA -Q "EXEC sp_configure 'remote access', 0; GO; RECONFIGURE; GO;"
+        run: docker exec -i $ENV_CONTAINER_ID /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "1q2w3e4r@#$" -Q "EXEC sp_configure 'remote access', 0; GO; RECONFIGURE; GO;"
       -
         name: Checkout
         uses: actions/checkout@v3
