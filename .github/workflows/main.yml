@@ -15,8 +15,7 @@ jobs:
           SA_PASSWORD: 1q2w3e4r@#$
           ACCEPT_EULA: 'Y'
         ports:
-          - 1433:1433        
-        command: /opt/mssql-tools/bin/sqlcmd \ -S localhost -U SA \ -Q \"EXEC sp_configure 'remote access', 0; GO; RECONFIGURE; GO;\"
+          - 1433:1433
     steps:    
       -
         name: Checkout
