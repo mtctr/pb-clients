@@ -6,8 +6,11 @@ WORKDIR /PB.Clients.API
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"
 
-COPY /PB.Clients.API/*.csproj .
+COPY ./PB.Clients.API/*.csproj .
 RUN dotnet restore
+
+COPY ./PB.Clients.API/* .
+RUN dotnet ef database update
 
 RUN dotnet publish -c Release -o /publish
 
