@@ -21,7 +21,7 @@ jobs:
         run: echo "ENV_CONTAINER_ID=$(docker ps --all --filter status=running --no-trunc --format "{{.ID}}")" >> $GITHUB_ENV
       -
         name: Allow Remote Connections to DB
-        run: docker exec -i $ENV_CONTAINER_ID /opt/mssql-tools/bin/sqlcmd \ -S localhost -U SA \ -Q "EXEC sp_configure 'remote access', 0; GO; RECONFIGURE; GO;"
+        run: docker exec -i $ENV_CONTAINER_ID /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -Q "EXEC sp_configure 'remote access', 0; GO; RECONFIGURE; GO;"
       -
         name: Checkout
         uses: actions/checkout@v3
