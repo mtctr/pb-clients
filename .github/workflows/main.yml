@@ -15,8 +15,8 @@ jobs:
           SA_PASSWORD: 1q2w3e4r@#$
           ACCEPT_EULA: 'Y'
         ports:
-          - 1433:1433
-    steps:
+          - 1433:1433        
+    steps:    
       -
         name: Checkout
         uses: actions/checkout@v3
@@ -29,6 +29,9 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+      -
+        name: Allow Remote Connectiosn to DB
+        run: docker exec -it mssql /opt/mssql-tools/bin/sqlcmd \ -S localhost -U SA \ -Q "EXEC sp_configure 'remote access', 0; GO; RECONFIGURE; GO;"
       - 
         name: Build and push
         uses: docker/build-push-action@v4
