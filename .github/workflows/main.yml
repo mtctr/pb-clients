@@ -15,7 +15,7 @@ jobs:
           SA_PASSWORD: 1q2w3e4r@#$
           ACCEPT_EULA: 'Y'
         ports:
-          - 1433:1433        
+          - 4433:1433        
     steps:
       - name: Set environment variable ENV_CONTAINER_ID
         run: echo "ENV_CONTAINER_ID=$(docker ps --all --filter status=running --no-trunc --format "{{.ID}}")" >> $GITHUB_ENV
