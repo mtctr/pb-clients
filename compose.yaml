@@ -1,0 +1,27 @@
+services:
+  db:
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "1q2w3e4r@#$$"
+    image: mcr.microsoft.com/mssql/server
+    restart: always
+    ports:
+      - '1401:1433'
+    expose:
+      - 1401
+    healthcheck:
+        test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 1q2w3e4r@#$$ -Q 'EXEC sp_configure 'remote access', 0; GO; RECONFIGURE; GO;' || exit 1"]
+        interval: 10s
+        retries: 10
+        start_period: 10s
+        timeout: 3s 
+  web:
+    build: src
+    depends_on:
+      - db
+    ports: 
+    - 5000:80
+
+
+
+
